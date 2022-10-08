@@ -37,3 +37,18 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+#Lista personal
+*.xls
+*.xlsx
+*.doc
+*.docx
+*.ods
+*.odt
+*.pdf
+*.zip
+*.tif
+*.tiff
+*.shp
+*.dbf
+*.shx
