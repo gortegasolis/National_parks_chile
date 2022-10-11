@@ -1,5 +1,5 @@
 # Import metadata
-metadata_df <- construct_download_url("https://docs.google.com/spreadsheets/d/1Oh7Di8zaskLgH6tkBtDfuonEKC5UHj1a", sheetid = "306609397") %>% read_csv()
+source("Import_metadata.R")
 
 names(metadata_df)
 
