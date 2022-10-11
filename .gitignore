@@ -53,3 +53,5 @@ vignettes/*.pdf
 *.dbf
 *.shx
 *.rds
+*.stversion
+*.sync-*
