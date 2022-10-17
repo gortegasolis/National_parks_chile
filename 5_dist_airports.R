@@ -22,20 +22,18 @@ gdist_airp <- sapply(unique(airp_to_pa_index$full_pa_name), function(x) {
   })
 }, USE.NAMES = TRUE, simplify = FALSE)
 
+#Flatten results
 airp_2_pa <- unlist2d(gdist_airp) %>%
   pivot_wider(names_from = .id.2, values_from = V1) %>%
   left_join(., airp_to_pa_index, by = c(".id.1" = "full_pa_name")) %>%
   rename(airp_2_pa_distance = Distance) %>%
   rename(airp_2_pa_time = Time) %>%
-  select(pa_name, Aerodromo, airp_2_pa_distance, airp_2_pa_time)
+  select(pa_name, Aerodromo, airp_2_pa_distance, airp_2_pa_time) %>%
+  mutate(airp_2_pa_distance = as.numeric(airp_2_pa_distance),
+         airp_2_pa_time = as.numeric(airp_2_pa_time))
 
-# Get direct distance between centroids
-airp_2_pa$airp_2_pa_direct_dist <- lapply(airp_2_pa$pa_name, function(x) {
-  df <- filter(airp_2_pa, pa_name == x)
-  pa <- filter(prot_areas, pa_name == df$pa_name[1]) %>% st_centroid()
-  airp <- filter(airports, Aerodromo == df$Aerodromo[1]) %>% st_centroid()
-  res <- st_distance(pa, airp, by_element = TRUE)
-  return(res)
-})
-
+#Backup
 saveRDS(airp_2_pa, "airp_2_pa.rds")
+
+#Save in SQLite database
+send2sqlite(condb, "airp_2_pa", tables = T)

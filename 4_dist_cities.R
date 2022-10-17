@@ -32,20 +32,18 @@ gdist <- sapply(unique(city_to_pa_index$full_pa_name), function(x) {
   })
 }, USE.NAMES = TRUE, simplify = FALSE)
 
+#Flatten results
 city_2_pa <- unlist2d(gdist) %>%
   pivot_wider(names_from = .id.2, values_from = V1) %>%
   left_join(., city_to_pa_index, by = c(".id.1" = "full_pa_name")) %>%
   rename(city_2_pa_distance = Distance) %>%
   rename(city_2_pa_time = Time) %>%
-  select(pa_name, URBANO, city_2_pa_distance, city_2_pa_time)
+  select(pa_name, URBANO, city_2_pa_distance, city_2_pa_time) %>%
+  mutate(city_2_pa_distance = as.numeric(city_2_pa_distance),
+         city_2_pa_time = as.numeric(city_2_pa_time))
 
-# Get direct distance between centroids
-city_2_pa$city_2_pa_direct_dist <- lapply(city_2_pa$pa_name, function(x) {
-  df <- filter(city_2_pa, pa_name == x)
-  pa <- filter(prot_areas, pa_name == df$pa_name[1]) %>% st_centroid()
-  city <- filter(ciudades_censo, URBANO == df$URBANO[1]) %>% st_centroid()
-  res <- st_distance(pa, city, by_element = TRUE)
-  return(res)
-})
+#Backup
+#saveRDS(city_2_pa, "city_2_pa.rds")
 
-saveRDS(city_2_pa, "city_2_pa.rds")
+#Save in SQLite database
+send2sqlite(condb, "city_2_pa", tables = T)
