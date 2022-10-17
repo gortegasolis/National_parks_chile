@@ -43,3 +43,6 @@ for (x in na.omit(unique(prot_areas$pa_name))){
 prot_acc <- readRDS("prot_acc.rds")
 
 prot_acc <- data.table::rbindlist(prot_acc) %>% select(!geometry)
+
+#Save in SQLite database
+send2sqlite(condb, "prot_acc", tables = T)
