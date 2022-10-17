@@ -38,4 +38,5 @@ prot_map <- tm_shape(prot_areas) +
 
 tmap_leaflet(prot_map, mode = "view")
 
-saveRDS(prot_areas, "prot_areas.rds")
+#Save in SQLite database
+send2sqlite(condb, "prot_areas", tables = T)

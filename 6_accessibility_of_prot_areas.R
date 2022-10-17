@@ -36,7 +36,9 @@ for (x in na.omit(unique(prot_areas$pa_name))){
 # prot_acc2 <- prot_acc2 %>%
 #   mutate(acc_50k = geobgu::raster_extract(access, prot, fun = mean, na.rm = TRUE))
 
-saveRDS(prot_acc, "prot_acc.rds")
+#Backup the dataset
+#saveRDS(prot_acc, "prot_acc.rds")
+
 
 prot_acc <- readRDS("prot_acc.rds")
 
