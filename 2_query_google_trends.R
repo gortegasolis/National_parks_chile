@@ -24,25 +24,25 @@ gtrends_data_chile <- lapply(id_list, function(x) {
 })
 
 gtrends_data_world2 <- lapply(id_list, function(x) {
-  res <- call_gtrends_wd(x)
+  res <- call_gtrends_wd(x, key_gtrends)
   Sys.sleep(sample(1:5, 1))
   return(res)
 })
 
 gtrends_data_chile2 <- lapply(id_list, function(x) {
-  res <- call_gtrends_cl(x)
+  res <- call_gtrends_cl(x, key_gtrends)
   Sys.sleep(sample(1:5, 1))
   return(res)
 })
 
 gtrends_data_world3 <- lapply(id_list2, function(x) {
-  res <- call_gtrends_wd(x)
+  res <- call_gtrends_wd(x, key_gtrends)
   Sys.sleep(sample(1:5, 1))
   return(res)
 })
 
 gtrends_data_chile3 <- lapply(id_list2, function(x) {
-  res <- call_gtrends_cl(x)
+  res <- call_gtrends_cl(x, key_gtrends)
   Sys.sleep(sample(1:5, 1))
   return(res)
 })
