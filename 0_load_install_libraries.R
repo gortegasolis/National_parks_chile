@@ -19,10 +19,13 @@ pacman::p_load(
   nngeo,
   reticulate,
   conflicted,
-  RSQLite
+  RSQLite,
+  DBI,
+  reticulate
 )
 
 pacman::p_load(tidyverse)
+
 
 # Function to keep a lightweight workspace
 send2sqlite <- function(con, dataframe, tables = F) {
@@ -49,3 +52,4 @@ send2sqlite <- function(con, dataframe, tables = F) {
 # Connect database
 condb <- dbConnect(RSQLite::SQLite(), "National_parks.sqlite")
 dbGetInfo(condb)
+dbListTables(condb)
