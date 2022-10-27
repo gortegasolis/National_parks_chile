@@ -37,11 +37,11 @@ var pa_tdiv_mean = pa_tdiv.reduceRegions({
 Export.table.toDrive({
   collection: pa_tdiv_min,
   description: "pa_tdiv_min"});
-  
+
 Export.table.toDrive({
   collection: pa_tdiv_max,
   description: "pa_tdiv_max"});
-  
+
 Export.table.toDrive({
   collection: pa_tdiv_mean,
   description: "pa_tdiv_mean"});
